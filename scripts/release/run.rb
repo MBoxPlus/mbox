@@ -4,6 +4,7 @@ require 'scripts/network/github_api'
 require 'json'
 
 def release(github_token, package_path)
+  raise "Current git is not clean.".red if !git_is_clean
   raise "GitHub PAT(Personal Access Token) was not found.".red if github_token.nil?
 
   release_yml_path = File.join(File.dirname(package_path), 'release.yml')
@@ -37,4 +38,9 @@ def get_hash_by_tag(remote_url, tag_name)
   else
     out.strip
   end
+end
+
+def git_is_clean
+  (code, out) = "git status".exec(__dir__, {:display_stdout => false})
+  out.include?("nothing to commit, working tree clean")
 end

@@ -25,6 +25,9 @@ task :bump, [:version] do |task, args|
     package_info["version"] = version
   end
   File.write(PACKAGE_FILE, YAML.dump(package_info))
+
+  "git add mbox-package.yml".exec(__dir__)
+  "git commit -m 'bump v#{package_info["version"]}".exec(__dir__)
 end
 
 task :bump_plugin do

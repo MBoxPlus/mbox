@@ -1,15 +1,16 @@
 # Release
 
 ## Release MBox
-### Step1. Bump Version
-```
-bundle exec rake 'bump[x.y.z]'
-```
 
-### Step2. Bump Plugin Version to Latest
+### Step1. Bump Plugin Version to Latest
 You can also change plugins' version in the file `mbox-package.yml` manually.
 ```
 bundle exec rake 'bump_plugin'
+```
+
+### Step2. Bump Version
+```
+bundle exec rake 'bump[x.y.z]'
 ```
 
 ### Step3. Archive
