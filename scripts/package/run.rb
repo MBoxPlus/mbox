@@ -2,36 +2,46 @@ require 'yaml'
 require 'json'
 require 'scripts/common/log'
 require 'scripts/common/install_mbox'
+require 'scripts/common/log'
 
-def package(working_dir, package_file_path)
-  LOG.info "MBox CLI installed.".green if install_mbox
+def package(github_token, root, package_file_path)
+  FileUtils.rm_rf(root)
+  FileUtils.mkdir(root) unless File.exists?(root)
 
-  package_info = YAML.load_file(package_file_path)
+  download(github_token, root, package_file_path)
 
-  plugins_source_dir = File.join(working_dir, 'temp')
-  FileUtils.rm_rf(plugins_source_dir)
-  FileUtils.mkdir(plugins_source_dir) unless File.exists?(plugins_source_dir)
-  build(plugins_source_dir, package_info['plugins'])
+  archive(root, package_file_path)
 end
 
-def build(root, plugins)
-  (code, out, err) = "mbox init plugin -v".exec(root)
-  raise err if code != 0
-
-  feature_hash = {"branch_prefix" => "feature", "current_containers"=> [], "name" => "", "repos" => []}
+def download(github_token, root, package_file_path)
+  LOG.info "Begin to Download Plugins".green
+  package_info = YAML.load_file(package_file_path)
+  plugins = package_info['plugins']
   plugins.each do |plugin|
-    if plugin['tag'].nil? || plugin['tag'].empty?
-      raise "Tag of plugin [#{plugin['name']}] is invalid.".yellow
+    if plugin["git"] =~ /^git@github.com:(.*)\/(.*).git/
+      name = plugin['name']
+      raise "Tag of plugin [#{name}] is invalid. Value: #{plugin['tag'].to_s}" if plugin['tag'].empty?
+      owner = $1
+      repo = $2
+      api = GitHubAPI.new(github_token, owner, repo)
+      (code, out) = api.get_release("v" + plugin['tag'])
+      release_json = JSON.parse(out)
+      asset = release_json["assets"][0]
+      asset_id = asset["id"]
+      file_name = asset["name"]
+      api.download_asset(asset_id, root)
+      "tar -zxf #{file_name}".exec(root)
+      FileUtils.rm(File.join(root, file_name))
     end
-    if plugin['git'].nil? || plugin['git'].empty?
-      raise "Git URL of plugin [#{plugin['name']}] is invalid.".yellow
-    end
-    repo_hash = { "components" => [], "last_type" => "tag", "last_branch" => plugin['tag'], "url" => plugin['git'] }
-    feature_hash['repos'] << repo_hash
   end
-  "mbox feature import '#{JSON.dump(feature_hash)}' -v".exec(root)
+end
 
-  "mbox pod install -v".exec(root)
-
-  "mbox plugin build --force --no-test -v".exec(root)
+def archive(root, package_file_path)
+  LOG.info "Begin to Archive".green
+  FileUtils.cp(package_file_path, File.join(root, "release.yml"))
+  package_info = YAML.load_file(package_file_path)
+  version = package_info['version']
+  tar_output_path = File.join(root, "mbox-#{version}.tar.gz")
+  FileUtils.rm_rf(tar_output_path)
+  "tar -czf release.tar.gz *".exec(root)
 end

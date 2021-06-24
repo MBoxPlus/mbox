@@ -10,8 +10,12 @@ def update_plugins_version(package_file_path)
                         "| cut -d '/' -f3".exec('/', {quiet: true})
     next unless code == 0
     tag = out.strip
-    LOG.info "Bump plugin[#{plugin['name']}] tag: #{tag}. Old is #{plugin['tag'].to_s}"
-    plugin['tag'] = tag if code == 0
+    if tag.empty? || tag == plugin["tag"]
+      LOG.info "Plugin[#{plugin["name"]}] has no new tag".yellow
+      next
+    end
+    LOG.info "Plugin[#{plugin['name']}]: " + plugin['tag'] + " -> " + tag.green
+    plugin['tag'] = tag
   end
 
   File.write(package_file_path, YAML.dump(package_info))
