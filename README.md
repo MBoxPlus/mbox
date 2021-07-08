@@ -7,6 +7,10 @@ brew install mbox
 ```
 > You need to [Install Homebrew](https://brew.sh/) first.
 
+## The Repository
+
+This repository is the repo without any source code of MBox. It is where we publish product, milestones and work plans. Also, our users search documents and submit issues here.
+
 ## Getting Started
 ### iOS
 [Getting Started for iOS](./doc/getting_started_ios.md)
