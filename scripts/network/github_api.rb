@@ -23,7 +23,19 @@ class GitHubAPI
        " -H \"Accept: application/vnd.github.v3+json\""\
        " -s"\
        " #{api}"\
-       " -d '{\"tag_name\":\"#{tag_name}\",\"target_commitish\":\"#{target_commitish}\"}'"
+       " -d '{\"tag_name\":\"#{tag_name}\",\"target_commitish\":\"#{target_commitish}\",\"name\":\"#{tag_name}\"}'"
+    curl.exec
+  end
+
+  def update_release(id, tag_name, target_commitish='main')
+    api = "#{api_url}/releases/#{id}"
+    curl = "curl -s"\
+       " -u username:#{@token}"\
+       " -X POST"\
+       " -H \"Accept: application/vnd.github.v3+json\""\
+       " -s"\
+       " #{api}"\
+       " -d '{\"tag_name\":\"#{tag_name}\",\"target_commitish\":\"#{target_commitish}\",\"name\":\"#{tag_name}\"}'"
     curl.exec
   end
 
@@ -35,6 +47,17 @@ class GitHubAPI
        " -H \"Content-Type: application/zip\""\
        " --data-binary @#{file}"\
        " #{url}?name=#{File.basename(file)}"
+    curl.exec
+  end
+
+  def delete_release_asset(id)
+    api = "#{api_url}/releases/assets/#{id}"
+    curl = "curl -s"\
+       " -u username:#{@token}"\
+       " -X DELETE"\
+       " -H \"Accept: application/vnd.github.v3+json\""\
+       " -s"\
+       " #{api}"
     curl.exec
   end
 
