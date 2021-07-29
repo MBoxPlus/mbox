@@ -24,7 +24,7 @@ def download(github_token, root, package_file_path)
       owner = $1
       repo = $2
       api = GitHubAPI.new(github_token, owner, repo)
-      (code, out) = api.get_release("v" + plugin['tag'])
+      (code, out) = api.get_release(plugin['tag'])
       release_json = JSON.parse(out)
       asset = release_json["assets"][0]
       asset_id = asset["id"]

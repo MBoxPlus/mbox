@@ -11,6 +11,8 @@ require 'yaml'
 PACKAGE_FILE = File.join(__dir__, 'mbox-package.yml')
 BUILD_DIR = File.expand_path(File.join(__dir__, '../build'))
 PACKAGE_DIR = File.expand_path(File.join(__dir__, '../package'))
+GITHUB_TOKEN_FILE = File.join(__dir__, 'github.token')
+GITHUB_TOKEN = File.read(GITHUB_TOKEN_FILE).strip
 
 task default: %w[package]
 
@@ -30,8 +32,9 @@ task :bump, [:version] do |task, args|
   "git commit -m 'bump v#{package_info["version"]}".exec(__dir__)
 end
 
-task :bump_plugin do
-  update_plugins_version(PACKAGE_FILE)
+task :bump_plugin, [:github_token] do |task, args|
+  github_token = get_github_token(args)
+  update_plugins_version(github_token, PACKAGE_FILE)
 end
 
 task :build_plugin do |task, args|
@@ -42,13 +45,25 @@ task :build_plugin do |task, args|
 end
 
 task :release_plugin, [:github_token] do |task, args|
-  release_all_plugin(args[:github_token], PACKAGE_FILE, BUILD_DIR)
+  github_token = get_github_token(args)
+  release_all_plugin(github_token, PACKAGE_FILE, BUILD_DIR)
 end
 
 task :package, [:github_token] do |task, args|
-  package(args[:github_token], PACKAGE_DIR, PACKAGE_FILE)
+  github_token = get_github_token(args)
+  package(github_token, PACKAGE_DIR, PACKAGE_FILE)
 end
 
 task :release, [:github_token] do |task, args|
-  release(args[:github_token], PACKAGE_DIR)
+  github_token = get_github_token(args)
+  release(github_token, PACKAGE_DIR)
+end
+
+def get_github_token(args)
+  token = args[:github_token] || GITHUB_TOKEN
+  if !token.nil? && !token.empty?
+    token
+  else
+    raise "Github Token is Needed.".red
+  end
 end

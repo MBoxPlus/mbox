@@ -24,9 +24,14 @@ bundle exec rake 'release[GITHUB_TOKEN]'
 ```
 
 ## Release Plugins
+
+### Step1. Build
 ```
 bundle exec rake build_plugin
+```
 
+### Step2. Release
+```
 bundle exec rake 'release_plugin[GITHUB_TOKEN]'
 ```
 > Use `FORCE_RELEASE=1` to override the existing version.

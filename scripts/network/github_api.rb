@@ -70,6 +70,15 @@ class GitHubAPI
     curl.exec
   end
 
+  def get_latest_release
+    api = "#{api_url}/releases/latest"
+    curl = "curl -s"\
+         " -u username:#{@token}"\
+         " -H \"Accept: application/vnd.github.v3+json\""\
+         " #{api}"
+    curl.exec
+  end
+
   def download_asset(asset_id, dest)
     api = "#{api_url}/releases/assets/#{asset_id}"
     curl = "curl -LOJ"\
