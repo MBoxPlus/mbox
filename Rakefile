@@ -20,16 +20,18 @@ task :bump, [:version] do |task, args|
   package_info = YAML.load_file(PACKAGE_FILE)
 
   if args[:version]
+    LOG.info "Bump version #{package_info["version"].yellow} -> #{args[:version].to_s.green}."
     package_info["version"] = args[:version]
   else
     version = Gem::Version.new(package_info["version"])
     version = version.bump.to_s + ".0"
+    LOG.info "Bump version #{package_info["version"].yellow} -> #{version.to_s.green}."
     package_info["version"] = version
   end
   File.write(PACKAGE_FILE, YAML.dump(package_info))
 
   "git add mbox-package.yml".exec(__dir__)
-  "git commit -m 'bump v#{package_info["version"]}".exec(__dir__)
+  "git commit -m 'bump v#{package_info["version"]}'".exec(__dir__)
 end
 
 task :bump_plugin, [:github_token] do |task, args|
