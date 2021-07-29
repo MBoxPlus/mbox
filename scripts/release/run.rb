@@ -7,8 +7,8 @@ def release(github_token, package_path)
   raise "Current git is not clean.".red if !git_is_clean
   raise "GitHub PAT(Personal Access Token) was not found.".red if github_token.nil?
 
-  release_yml_path = File.join(File.dirname(package_path), 'release.yml')
-  raise "File: '#{release_yml_path}' is required." unless File.exists?(release_yml_path)
+  release_yml_path = File.join(package_path,'release.yml')
+  raise "File: '#{release_yml_path}' is required.".red unless File.exists?(release_yml_path)
 
   package_info = YAML.load_file(release_yml_path)
   owner = package_info["owner"]
@@ -26,7 +26,7 @@ def release(github_token, package_path)
     upload_url = $1
     LOG.info("Upload URL: #{upload_url}")
     release_file_path = File.join(File.dirname(package_path), "mbox-#{version}.tar.gz")
-    FileUtils.cp(package_path, release_file_path)
+    FileUtils.cp(File.join(package_path, "release.tar.gz"), release_file_path)
     api.upload_release_asset(upload_url, release_file_path)
   end
 end
