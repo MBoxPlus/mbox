@@ -5,31 +5,31 @@ repo: mbox
 plugins:
 - name: MBoxCore
   git: git@github.com:mboxplus/mbox-core.git
-  tag: ''
+  tag: v2.2.0
 - name: MBoxGit
   git: git@github.com:mboxplus/mbox-git.git
-  tag: ''
+  tag: v1.2.0
 - name: MBoxWorkspace
   git: git@github.com:mboxplus/mbox-workspace.git
-  tag: ''
+  tag: v1.2.0
 - name: MBoxDependencyManager
   git: git@github.com:mboxplus/mbox-dependency-manager.git
-  tag: ''
+  tag: v1.4.0
 - name: MBoxRuby
   git: git@github.com:mboxplus/mbox-ruby.git
-  tag: ''
+  tag: v1.1.0
 - name: MBoxContainer
   git: git@github.com:mboxplus/mbox-container.git
-  tag: ''
+  tag: v1.0.0
 - name: MBoxCocoapods
   git: git@github.com:mboxplus/mbox-cocoapods.git
-  tag: ''
+  tag: v1.2.0
 - name: MBoxDev
   git: git@github.com:mboxplus/mbox-dev.git
-  tag: ''
+  tag: v1.1.0
 - name: MBoxDevNative
   git: git@github.com:mboxplus/mbox-dev-native.git
-  tag: ''
+  tag: v1.0.0
 - name: MBoxDevRuby
   git: git@github.com:mboxplus/mbox-dev-ruby.git
-  tag: ''
+  tag: v1.0.0
