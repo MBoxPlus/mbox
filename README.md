@@ -3,7 +3,9 @@ MBox is a toolchain App on macOS which focus on Mobile App Development. It can h
 
 ## Installation
 ```
-brew install mbox
+$ brew tap MBoxPlus/homebrew-tap
+
+$ brew install mbox
 ```
 > You need to [Install Homebrew](https://brew.sh/) first.
 
