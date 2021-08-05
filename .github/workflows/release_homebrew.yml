@@ -28,8 +28,8 @@ jobs:
         uses: izumin5210/action-homebrew-tap@v1.0.0
         with:
           tap: MBoxPlus/homebrew-tap
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tap-token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.ACCESS_TOKEN }}
+          tap-token: ${{ secrets.ACCESS_TOKEN }}
           release-branch: master
-          formula: Formula/mbox
+          formula: Formula/mbox.rb
 
