@@ -29,7 +29,7 @@ You have many ways to participate in this project.
 - [Review pull requests](https://github.com/MBoxPlus/mbox/pulls)
 
 If you want to become a developer of MBox, please see docs below:
-- [How to release plugins](./doc/release.md)
+- [How to Release](./doc/release.md)
 
 ## License
 MBox is available under [GNU General Public License v2.0 or later](./LICENSE).
