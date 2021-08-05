@@ -20,11 +20,6 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Update Homebrew Formula
-        uses: izumin5210/action-homebrew-tap@v1.0.0
-        with:
-          tap: MBoxPlus/homebrew-tap
-          token: ${{ secrets.ACCESS_TOKEN }}
-          tap-token: ${{ secrets.ACCESS_TOKEN }}
-          release-branch: master
-          formula: Formula/mbox.rb
-
+        run: |
+          echo "$GITHUB_REF"
+          bundle exec rake "release_homebrew[$GITHUB_REF]"
