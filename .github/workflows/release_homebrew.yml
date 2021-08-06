@@ -26,7 +26,7 @@ jobs:
 
       - name: Setup Git Access
         run: |
-          git config --global url."https://${{ secrets.ACESS_TOKEN }}@github".insteadOf https://github
+          git config --global url."https://${{ secrets.ACCESS_TOKEN }}@github".insteadOf https://github
 
       - name: Update Homebrew Formula
         env: # Or as an environment variable
