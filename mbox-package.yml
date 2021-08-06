@@ -2,6 +2,7 @@
 version: 1.0.0
 owner: mboxplus
 repo: mbox
+brew_tap: git@github.com:mboxplus/homebrew-tap.git
 plugins:
 - name: MBoxCore
   git: git@github.com:mboxplus/mbox-core.git

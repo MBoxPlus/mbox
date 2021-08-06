@@ -1,10 +1,12 @@
 require 'open3'
+require 'scripts/common/log'
 
 class String
   #
   def exec(dir='/', command_options={}, &block)
     options = ({"quiet": false, "display_stdout": true, "display_stderr": true}).merge(command_options)
-    $stdout.puts  "⚡️Run command: #{self}" unless options[:quiet]
+    LOG.info "⚡️Run command: #{self}" unless options[:quiet]
+    # $stdout.puts  "⚡️Run command: #{self}" unless options[:quiet]
     exit_code = 0
     out = ""
     err = ""
@@ -25,18 +27,21 @@ class String
 
           if stream == stdout
             out += data
-            $stdout.puts data if !options[:quiet] && options[:display_stderr]
+            LOG.info data if !options[:quiet] && options[:display_stderr]
+            # $stdout.puts data if !options[:quiet] && options[:display_stderr]
             block.call(line) if block
           else
             err += data
-            $stderr.puts data if !options[:quiet] && options[:display_stderr]
+            LOG.error data if !options[:quiet] && options[:display_stderr]
+            # $stderr.puts data if !options[:quiet] && options[:display_stderr]
             block.call(line) if block
           end
         end
       end
       exit_code = wait_thr.value.to_i
     end
-    $stderr.puts "❌Exit code #{exit_code}. Command: #{self}" if exit_code != 0
+    LOG.error "❌Exit code #{exit_code}. Command: #{self}" if exit_code != 0
+    # $stderr.puts "❌Exit code #{exit_code}. Command: #{self}" if exit_code != 0
     [exit_code, out, err]
   end
 end

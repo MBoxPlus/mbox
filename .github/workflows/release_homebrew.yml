@@ -24,6 +24,8 @@ jobs:
           bundler-cache: true
 
       - name: Update Homebrew Formula
+        env: # Or as an environment variable
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
           echo "$GITHUB_REF"
           bundle exec rake "release_homebrew[$GITHUB_REF]"

@@ -8,11 +8,17 @@ require 'scripts/package/update_plugins_version'
 require 'rubygems/version.rb'
 require 'yaml'
 
-PACKAGE_FILE = File.join(__dir__, 'mbox-package.yml')
-BUILD_DIR = File.expand_path(File.join(__dir__, '../build'))
-PACKAGE_DIR = File.expand_path(File.join(__dir__, '../package'))
-GITHUB_TOKEN_FILE = File.join(__dir__, 'github.token')
-GITHUB_TOKEN = File.read(GITHUB_TOKEN_FILE).strip
+if ENV['GITHUB_TOKEN']
+  GITHUB_TOKEN = ENV['GITHUB_TOKEN']
+else
+  PACKAGE_FILE = File.join(__dir__, 'mbox-package.yml')
+  BUILD_DIR = File.expand_path(File.join(__dir__, '../build'))
+  PACKAGE_DIR = File.expand_path(File.join(__dir__, '../package'))
+  HOMEBREW_DIR = File.expand_path(File.join(__dir__, '../brew'))
+  GITHUB_TOKEN_FILE = File.join(__dir__, 'github.token')
+  GITHUB_TOKEN = File.read(GITHUB_TOKEN_FILE).strip
+end
+raise "GITHUB_TOKEN is missing".red if GITHUB_TOKEN.nil?
 
 task default: %w[package]
 
@@ -20,8 +26,9 @@ task :bump, [:version] do |task, args|
   package_info = YAML.load_file(PACKAGE_FILE)
 
   if args[:version]
-    LOG.info "Bump version #{package_info["version"].yellow} -> #{args[:version].to_s.green}."
-    package_info["version"] = args[:version]
+    LOG.info "Bump version #{package_info["version"].yellow} -> #{args[:version].to_s.green}." do
+      package_info["version"] = args[:version]
+    end
   else
     version = Gem::Version.new(package_info["version"])
     version = version.bump.to_s + ".0"
@@ -59,6 +66,11 @@ end
 task :release, [:github_token] do |task, args|
   github_token = get_github_token(args)
   release(github_token, PACKAGE_DIR)
+end
+
+task :release_homebrew, [:github_token] do |task, args|
+  github_token = get_github_token(args)
+  release_homebrew(github_token, HOMEBREW_DIR, PACKAGE_FILE)
 end
 
 def get_github_token(args)
