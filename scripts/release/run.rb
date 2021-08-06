@@ -45,7 +45,7 @@ def release_homebrew(github_token, root, package_file_path)
     repo = package_info['repo']
 
     "git clone #{tap}".exec(root)
-    raise "Homebrew tap url is invalid".red unless tap =~ /git@github.com:(.*)\/(.*).git/
+    raise "Homebrew tap url is invalid".red unless tap =~ /https:\/\/github.com\/(.*)\/(.*).git/
     brew_owner = $1
     brew_repo = $2
     brew_git = Git.open(File.join(root, brew_repo), :log => LOG)
