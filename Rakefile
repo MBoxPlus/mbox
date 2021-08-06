@@ -8,13 +8,14 @@ require 'scripts/package/update_plugins_version'
 require 'rubygems/version.rb'
 require 'yaml'
 
+PACKAGE_FILE = File.join(__dir__, 'mbox-package.yml')
+BUILD_DIR = File.expand_path(File.join(__dir__, '../build'))
+PACKAGE_DIR = File.expand_path(File.join(__dir__, '../package'))
+HOMEBREW_DIR = File.expand_path(File.join(__dir__, '../brew'))
+
 if ENV['GITHUB_TOKEN']
   GITHUB_TOKEN = ENV['GITHUB_TOKEN']
 else
-  PACKAGE_FILE = File.join(__dir__, 'mbox-package.yml')
-  BUILD_DIR = File.expand_path(File.join(__dir__, '../build'))
-  PACKAGE_DIR = File.expand_path(File.join(__dir__, '../package'))
-  HOMEBREW_DIR = File.expand_path(File.join(__dir__, '../brew'))
   GITHUB_TOKEN_FILE = File.join(__dir__, 'github.token')
   GITHUB_TOKEN = File.read(GITHUB_TOKEN_FILE).strip
 end
