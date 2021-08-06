@@ -33,7 +33,7 @@ def release(github_token, package_path)
   end
 end
 
-def release_homebrew(github_token, root, package_file_path)
+def release_homebrew(github_token, tag, root, package_file_path)
   LOG.info "Begin Release Homebrew".green do
     LOG.info "Make sure dir #{root} is existing"
     FileUtils.rm_rf(root)
@@ -56,7 +56,7 @@ def release_homebrew(github_token, root, package_file_path)
     formula = File.read(formula_path)
 
     api = GitHubAPI.new(github_token, owner, repo)
-    (code, out) = api.get_latest_release
+    (code, out) = api.get_release(tag)
     result = JSON.parse(out)
     version = result["name"].sub(/^v/, '')
     raise "Number of assets is 0 or more than one".red if result["assets"].length > 1 || result["assets"].empty?

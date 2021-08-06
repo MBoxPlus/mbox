@@ -69,9 +69,9 @@ task :release, [:github_token] do |task, args|
   release(github_token, PACKAGE_DIR)
 end
 
-task :release_homebrew, [:github_token] do |task, args|
+task :release_homebrew, [:tag] do |task, args|
   github_token = get_github_token(args)
-  release_homebrew(github_token, HOMEBREW_DIR, PACKAGE_FILE)
+  release_homebrew(github_token, args[:version].sub('refs/tags/', ''), HOMEBREW_DIR, PACKAGE_FILE)
 end
 
 def get_github_token(args)
