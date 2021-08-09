@@ -45,7 +45,7 @@ def release_homebrew(github_token, tag, root, package_file_path)
     repo = package_info['repo']
 
     "git clone #{tap}".exec(root)
-    raise "Homebrew tap url is invalid".red unless tap =~ /https:\/\/github.com\/(.*)\/(.*).git/
+    raise "Homebrew tap url is invalid.".red unless tap =~ /https:\/\/github.com\/(.*)\/(.*).git/
     brew_owner = $1
     brew_repo = $2
     brew_git = Git.open(File.join(root, brew_repo), :log => LOG)
@@ -59,17 +59,17 @@ def release_homebrew(github_token, tag, root, package_file_path)
     (code, out) = api.get_release(tag)
     result = JSON.parse(out)
     version = result["name"].sub(/^v/, '')
-    raise "Number of assets is 0 or more than one".red if result["assets"].length > 1 || result["assets"].empty?
+    raise "Number of assets is 0 or more than 1.".red if result["assets"].length > 1 || result["assets"].empty?
     asset = result["assets"][0]
     name = asset["name"]
     api.download_asset(asset["id"], root)
     (code, out) = "sha256sum #{name}".exec(root)
-    raise "Failed on generating sha256 hash" unless out=~/^(\w+)\s+#{name}$/
+    raise "Failed on generating sha256 hash." unless out=~/^(\w+)\s+#{name}$/
     sha256 = $1
     formula = formula.sub(/VERSION\s*=\s*.*\.freeze/, "VERSION = \"#{version}\".freeze")
     formula = formula.sub(/sha256\s*".*"/, "sha256 \"#{sha256}\"")
     File.write(formula_path, formula)
-    raise "There is no need to update brew".yellow if brew_git.status.changed.count == 0
+    raise "There is no need to update brew.".yellow if brew_git.status.changed.count == 0
     brew_git.add(:all => true)
     brew_git.commit("#{repo} #{version}")
     brew_git.push("origin")
