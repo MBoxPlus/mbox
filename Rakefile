@@ -26,16 +26,20 @@ task default: %w[package]
 task :bump, [:version] do |task, args|
   package_info = YAML.load_file(PACKAGE_FILE)
 
+  version = ''
   if args[:version]
     LOG.info "Bump version #{package_info["version"].yellow} -> #{args[:version].to_s.green}." do
-      package_info["version"] = args[:version]
+      version = args[:version]
     end
   else
     version = Gem::Version.new(package_info["version"])
     version = version.bump.to_s + ".0"
     LOG.info "Bump version #{package_info["version"].yellow} -> #{version.to_s.green}."
-    package_info["version"] = version
   end
+
+  raise "#{version} is not a valid semver version string.".red unless version =~ /^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
+
+  package_info["version"] = version
   File.write(PACKAGE_FILE, YAML.dump(package_info))
 
   "git add mbox-package.yml".exec(__dir__)
