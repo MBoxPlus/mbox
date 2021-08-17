@@ -19,6 +19,8 @@ jobs:
       - name: Setup Git Access
         run: |
           git config --global url."https://${{ secrets.ACCESS_TOKEN }}@github".insteadOf https://github
+          git config --global user.email "mbox.actions@mbox.com"
+          git config --global user.name "MBox Actions"
 
       - name: Update Homebrew Formula
         env: # Or as an environment variable
