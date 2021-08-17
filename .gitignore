@@ -2,3 +2,6 @@
 build
 temp
 *.token
+.bundle
+ruby
+vendor

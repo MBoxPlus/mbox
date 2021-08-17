@@ -9,7 +9,8 @@ on:
         required: true
 
 jobs:
-  homebrew:
+  release:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2

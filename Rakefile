@@ -44,6 +44,7 @@ task :bump, [:version] do |task, args|
 
   "git add mbox-package.yml".exec(__dir__)
   "git commit -m 'bump v#{package_info["version"]}'".exec(__dir__)
+  "git push origin".exec(__dir__)
 end
 
 task :bump_plugin, [:github_token] do |task, args|
