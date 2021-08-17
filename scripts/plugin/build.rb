@@ -21,7 +21,7 @@ def build(root, package_file_path)
     repo_hash = { "components" => [{"active" => [], "tool" => DEACTIVATED_TOOL}], "last_type" => "branch", "last_branch" => "main", "url" => plugin['git'] }
     feature_hash['repos'] << repo_hash
   end
-  code, _, _ = "mbox config container.allow_multiple_containers Gem CocoaPods".exec(root)
+  code, _, _ = "mbox config container.allow_multiple_containers Gem Bundler CocoaPods".exec(root)
   raise "Failed on Setting Configuration.".red unless code == 0
 
   code, _, _ = "mbox feature import '#{JSON.dump(feature_hash)}' -v".exec(root)
