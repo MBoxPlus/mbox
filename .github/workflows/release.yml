@@ -14,7 +14,7 @@ on:
 jobs:
   release:
     if: ${{ github.ref == 'refs/heads/main' }}
-    runs-on: macos-latest
+    runs-on: macos-11
     steps:
       - uses: actions/checkout@v2
 
@@ -23,10 +23,10 @@ jobs:
           ruby-version: 2.6
           bundler-cache: true
 
-      - name: "Select Xcode 12.4"
+      - name: "Select Xcode 12.5.1"
         uses: devbotsxyz/xcode-select@v1
         with:
-          version: "12.4"
+          version: "12.5.1"
 
       - name: "Setup Git Access"
         run: |
