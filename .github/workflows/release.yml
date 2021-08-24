@@ -8,7 +8,7 @@ on:
         description: 'Version to Release'
         required: true
       bump-plugin:
-        description: 'Whether need to bump the version of plugins'
+        description: 'Whether need to bump the version of plugins. Value: true/false'
         required: false
         default: 'false'
 jobs:
