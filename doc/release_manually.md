@@ -1,5 +1,7 @@
 # Release Manually
 
+This doc is only for internal member of MBox Team.
+
 ## Release MBox
 
 Create a Github PAT(Personal Access Token) file.
