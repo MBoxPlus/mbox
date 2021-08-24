@@ -7,7 +7,10 @@ on:
       version:
         description: 'Version to Release'
         required: true
-
+      bump-plugin:
+        description: 'Whether need to bump the version of plugins'
+        required: false
+        default: 'false'
 jobs:
   release:
     if: ${{ github.ref == 'refs/heads/main' }}
@@ -30,6 +33,7 @@ jobs:
           git config --global url."https://${{ secrets.ACCESS_TOKEN }}@github".insteadOf https://github
 
       - name: "Bump Plugins Version"
+        if: ${{ github.event.inputs.bump-plugin == 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
