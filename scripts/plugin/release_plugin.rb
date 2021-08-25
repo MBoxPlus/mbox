@@ -43,7 +43,7 @@ def release_plugin(github_token, owner, repo, package_dir)
     release_json = JSON.parse(out)
   end
 
-  if ENV["FORCE_RELEASE"] && !result['assets'].empty?
+  if ENV["FORCE_RELEASE"] && !result['assets'].nil? && !result['assets'].empty?
     result['assets'].each do |asset|
       LOG.info "Delete Release Asset [id=#{asset['id']}, name=#{asset['name']}]".yellow
       api.delete_release_asset(asset['id'])
