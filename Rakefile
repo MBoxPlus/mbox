@@ -27,7 +27,7 @@ task :bump, [:version] do |task, args|
   package_info = YAML.load_file(PACKAGE_FILE)
 
   version = ''
-  if !args[:version].nil? && !args[:version].strip.blank?
+  if !args[:version].nil? && !args[:version].strip.empty?
     LOG.info "Bump version #{package_info["version"].yellow} -> #{args[:version].to_s.green}." do
       version = args[:version]
     end
