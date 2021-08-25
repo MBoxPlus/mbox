@@ -3,7 +3,7 @@ require 'json'
 require 'scripts/common/log'
 require 'scripts/common/install_mbox'
 
-DEACTIVATED_TOOL = "Gem"
+DEACTIVATED_TOOL = "Bundler"
 
 def build(root, package_file_path)
   LOG.info "MBox CLI installed.".green if install_mbox
