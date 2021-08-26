@@ -2,11 +2,11 @@
 
 ## Release MBox
 
-- Change the plugins' version in `mbox-package.yml` file.
+- If you allow to bump plugins' version automatically, skip it. If you don't want to bump version automatically, you need to change the plugins' version in `mbox-package.yml` file.
 
 - Open `GitHub Action` page on the repo `MBoxPlus/mbox`.
 
-- Choose branch 'main' and input the `Semantic version` to release.
+- Choose branch 'main' and pass the **semantic version** (like "1.0.0") to the input field `Version of Release`. If you don't want to bump version automatically, pass **false** to the input field `Bump Plugin Version`.
 
 - Click the button `Run workflow`.
 

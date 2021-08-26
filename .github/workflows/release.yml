@@ -5,11 +5,11 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to Release. MINOR version will be bumped if the value is empty.'
+        description: '[Version of Release] Version to Release. MINOR version will be bumped if the value is empty.'
         required: false
         default: ''
       bump-plugin:
-        description: 'Whether need to bump the version of plugins to latest. Value: true/false.'
+        description: '[Bump Plugin Version] Whether need to bump the version of plugins to latest. Value: true/false.'
         required: false
         default: 'true'
 jobs:
