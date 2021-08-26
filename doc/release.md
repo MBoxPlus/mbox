@@ -2,9 +2,11 @@
 
 ## Release MBox
 
+- Change the plugins' version in `mbox-package.yml` file.
+
 - Open `GitHub Action` page on the repo `MBoxPlus/mbox`.
 
-- Choose branch 'main' and input the `Semantic version` to release. 
+- Choose branch 'main' and input the `Semantic version` to release.
 
 - Click the button `Run workflow`.
 
