@@ -25,7 +25,9 @@ Add `.mboxconfig` file to the root directory of your project.
 
 Commit and push this change.
 
-> We strongly recommend you use `Gemfile` to manager the version of `CocoaPods`. Here is a [demo](https://github.com/MBoxPlus/MBoxReposDemo/blob/main/.mboxconfig).
+If you don't have your own project, here is a [demo](https://github.com/MBoxPlus/MBoxReposDemo/blob/main/.mboxconfig).
+
+> We strongly recommend you use `Gemfile` to manager the version of `CocoaPods`.
 
 ## 3. Add Container
 
@@ -63,9 +65,13 @@ mbox feature start [feature_name]
 
 ## 7. Dependent Repository
 
-Usually, we have some dependent repositories to develop at the same time.
+Before it, you need to run `mbox pod install` again.
 
-If you have already added our [demo](https://github.com/MBoxPlus/MBoxReposDemo) container, then you can add the dependent repository `SnapKit`.
+```shell
+mbox pod install
+```
+
+Usually, we have some dependent repositories to develop at the same time.
 
 ```shell
 mbox add [DEPENDENT_GIT_URL] [TARGET_BRANCH] --checkout-from-commit
@@ -87,6 +93,8 @@ Run `mbox pod install` again. You will find this repo is under the `Development 
 ---
 
 ## Resources
+
+[Quick Start Demo](quick_start_demo_ios.md)
 
 [CLI Documentation](https://github.com/MBoxPlus/mbox/wiki/CLI-documentation)
 

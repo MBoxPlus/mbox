@@ -1,4 +1,7 @@
 # MBox - Toolchain for Mobile App Development
+
+[简体中文](./README-CN.md) | **English**
+
 MBox is a toolchain App on macOS which focuses on Mobile App Development. It can help developers manage environments, dependencies, or repositories. Besides, developers can customize their tools or workflow by developing an MBox Plugin.
 
 ## Installation
@@ -14,8 +17,12 @@ $ brew install mbox
 This repository is the repo without any source code of MBox. It is where we publish products, milestones, and work plans. Also, our users search documents and submit issues here.
 
 ## Getting Started
+
 ### iOS
-[Getting Started for iOS](./doc/getting_started_ios.md)
+
+- [Quick Start Demo](doc/quick_start_demo_ios.md)
+
+- [Getting Started for iOS](./doc/getting_started_ios.md)
 
 ### Android
 *Work in Progress*
@@ -34,8 +41,7 @@ You have many ways to participate in this project.
 
 - [Release Guide](doc/release.md)
 
-## Support
-- [Communicate on Github issues](https://github.com/MBoxPlus/mbox/issues)
+## Discuss
 - WeChat: 123649881
 <p align="left"><img src="doc/wechat.jpeg" alt="Wechat group" width="320px"></p>
 
