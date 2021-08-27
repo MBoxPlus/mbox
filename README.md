@@ -23,11 +23,6 @@ This repository is the repo without any source code of MBox. It is where we publ
 ### Flutter
 *Work in Progress*
 
-## Support
-- [Communicate on Github issues](https://github.com/MBoxPlus/mbox/issues)
-- WeChat: 123649881
-<p align="left"><img src="doc/wechat.jpeg" alt="Wechat group" width="320px"></p>
-
 ## Contributing
 You have many ways to participate in this project.
 - [Submit bugs or feature requests](https://github.com/MBoxPlus/mbox/issues)
@@ -38,6 +33,11 @@ You have many ways to participate in this project.
 - [Build Guide](doc/build.md)
 
 - [Release Guide](doc/release.md)
+q
+## Support
+- [Communicate on Github issues](https://github.com/MBoxPlus/mbox/issues)
+- WeChat: 123649881
+<p align="left"><img src="doc/wechat.jpeg" alt="Wechat group" width="320px"></p>
 
 ## License
 MBox is available under [GNU General Public License v2.0 or later](./LICENSE).
