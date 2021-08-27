@@ -1,5 +1,7 @@
 # Getting Started for iOS
 
+[简体中文](getting_started_ios-cn.md) | **English**
+
 ## 1. Create Workspace
 
 Init a MBox workspace

@@ -18,6 +18,8 @@ $ brew install mbox
 
 ## 开始使用
 
+详细的 [CLI 文档](https://github.com/MBoxPlus/mbox/wiki/CLI-documentation)
+
 ### iOS
 
 - [快速开始 Demo](doc/quick_start_demo_ios.md)

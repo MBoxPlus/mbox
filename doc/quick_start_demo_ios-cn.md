@@ -1,5 +1,7 @@
 # 快速开始 Demo
 
+**简体中文** | [English](quick_start_demo_ios.md)
+
 通过下面的步骤，将帮助你快速了解如何使用 MBox
 
 ```shell

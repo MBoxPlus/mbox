@@ -1,5 +1,7 @@
 # iOS 项目接入与使用
 
+**简体中文** | [English](getting_started_ios.md)
+
 ## 1. 创建 Workspace
 
 首先创建一个 Workspace

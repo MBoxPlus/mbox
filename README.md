@@ -18,6 +18,8 @@ This repository is the repo without any source code of MBox. It is where we publ
 
 ## Getting Started
 
+More detail [CLI documentation](https://github.com/MBoxPlus/mbox/wiki/CLI-documentation)
+
 ### iOS
 
 - [Quick Start Demo](doc/quick_start_demo_ios.md)
