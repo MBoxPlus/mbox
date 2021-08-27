@@ -33,7 +33,7 @@ You have many ways to participate in this project.
 - [Build Guide](doc/build.md)
 
 - [Release Guide](doc/release.md)
-q
+
 ## Support
 - [Communicate on Github issues](https://github.com/MBoxPlus/mbox/issues)
 - WeChat: 123649881
