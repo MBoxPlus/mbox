@@ -23,20 +23,34 @@ mbox init plugin
 mbox config container.allow_multiple_containers Bundler CocoaPods
 
 # Add source code repository
+mbox add https://github.com/MBoxPlus/mbox-core.git main
 mbox add https://github.com/MBoxPlus/mbox-workspace.git main
-mbox add https://github.com/MBoxPlus/mbox-container.git main
+# You can add one or more MBox plugin source-code repositories here.
+... 
 
 # Run pod install
 mbox pod install
 ```
 
-You can open Xcode Workspace `DevMBox.xcworkspace` and `Build` now.
+Open the Xcode workspace `DevMBox.xcworkspace` and `Build` it.
 
 ### 3. Run
 
+There are two kinds of ways to debug MBox CLI.
+
+#### Terminal
+
 ```
-# Add configuration root path of the workspace
+# Set configuration for the root path of the workspace
 mbox config core.dev-root /[PATH]/DevMBox -g
 ```
 
 Now you can use `mdev` to replace `mbox` to run locally.
+
+#### Xcode
+
+Open `Edit Scheme...`>`Run`>`Arguments` and set MBox CLI arguments. Please make sure the argument `--dev-root` is set. 
+
+> `--root` The root path of the workspace for testing
+> 
+> `--dev-root` The root path of the MBox development workspace.
