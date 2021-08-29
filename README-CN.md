@@ -4,6 +4,8 @@
 
 MBox 是一款运行在 macOS 上，专注于移动端研发的工具链应用。它不仅能帮助开发者管理环境、项目依赖和仓库，还允许开发者通过开发 MBox 插件来定制属于自己的工具链。
 
+概念和术语（比如 Workspace, Feature, Container 等等）解释在[这里](https://github.com/MBoxPlus/mbox/wiki/MBox-terminology-cn) 。
+
 ## 安装
 ```
 $ brew tap MBoxPlus/homebrew-tap
