@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.1.5
+## 1.2.0
 
 #### Features
 
