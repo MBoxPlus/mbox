@@ -20,7 +20,7 @@ Add `.mboxconfig` file to the root directory of your project.
 ```JSON
 {
     "podfile": "Relative path to Podfile",
-    "xcodeproj": "Relative path to xcodeproj", // optional
+    "xcodeproj": "Relative path to xcodeproj",
     "podlock": "Relative path to Podfile.lock"  // optional
 }
 ```

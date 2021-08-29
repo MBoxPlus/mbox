@@ -4,6 +4,8 @@
 
 MBox is a toolchain App on macOS which focuses on Mobile App Development. It can help developers manage environments, dependencies, or repositories. Besides, developers can customize their tools or workflow by developing an MBox Plugin.
 
+Concepts and terminology (e.g. a Workspace, Feature, Container and so forth) is explained [here](https://github.com/MBoxPlus/mbox/wiki/MBox-terminology).
+
 ## Installation
 ```
 $ brew tap MBoxPlus/homebrew-tap
