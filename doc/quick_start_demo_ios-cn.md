@@ -18,7 +18,7 @@ mbox pod install
 mbox go # Open Xcode
 ```
 
-更多请参考 [iOS 项目的接入与使用](./getting_started_ios.md) 来学习如何在你的项目中接入 MBox.
+更多请参考 [iOS 项目的接入与使用](./getting_started_ios-cn.md) 来学习如何在你的项目中接入 MBox.
 
 ## 资源
 
