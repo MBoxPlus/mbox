@@ -40,7 +40,13 @@ def release_homebrew(github_token, tag, root, package_file_path)
     FileUtils .mkdir(root) unless File.exists?(root)
 
     package_info = YAML.load_file(package_file_path)
+    formula_name = "mbox"
     tap = package_info['brew_tap']
+    if tag =~ /[0-9\.]-alpha/
+      LOG.info "Release to the tap for alpha test"
+      tap = package_info['brew_tap_alpha']
+      formula_name = "mboxt"
+    end
     owner = package_info['owner']
     repo = package_info['repo']
 
@@ -52,7 +58,7 @@ def release_homebrew(github_token, tag, root, package_file_path)
     if brew_git.current_branch != "master"
       brew_git.checkout('master')
     end
-    formula_path = File.join(root, brew_repo, 'Formula', 'mbox.rb')
+    formula_path = File.join(root, brew_repo, 'Formula', "#{formula_name}.rb")
     formula = File.read(formula_path)
 
     api = GitHubAPI.new(github_token, owner, repo)
