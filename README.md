@@ -34,7 +34,7 @@ Concepts and terminology (e.g. a Workspace, Feature, Container and so forth) is 
 
 ## Advanced Usage
 
-- [使用指南](https://github.com/MBoxPlus/mbox/wiki/Tutorial)
+- [Tutorial](https://github.com/MBoxPlus/mbox/wiki/Tutorial)
 
 - [CLI documentation](https://github.com/MBoxPlus/mbox/wiki/CLI-documentation)
 
