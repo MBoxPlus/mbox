@@ -1,27 +1,27 @@
 ---
-version: 1.2.0
+version: 1.2.1
 owner: mboxplus
 repo: mbox
 brew_tap: https://github.com/mboxplus/homebrew-tap.git
 plugins:
 - name: MBoxCore
   git: git@github.com:mboxplus/mbox-core.git
-  tag: v2.2.5
+  tag: v2.2.6
 - name: MBoxGit
   git: git@github.com:mboxplus/mbox-git.git
   tag: v1.2.4
 - name: MBoxWorkspace
   git: git@github.com:mboxplus/mbox-workspace.git
-  tag: v1.2.8
+  tag: v1.2.9
 - name: MBoxDependencyManager
   git: git@github.com:mboxplus/mbox-dependency-manager.git
-  tag: v1.4.4
+  tag: v1.4.5
 - name: MBoxRuby
   git: git@github.com:mboxplus/mbox-ruby.git
-  tag: v1.1.3
+  tag: v1.1.4
 - name: MBoxContainer
   git: git@github.com:mboxplus/mbox-container.git
-  tag: v1.0.5
+  tag: v1.0.6
 - name: MBoxCocoapods
   git: git@github.com:mboxplus/mbox-cocoapods.git
   tag: v1.2.5
