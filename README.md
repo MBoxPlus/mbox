@@ -47,6 +47,7 @@ You have many ways to participate in this project.
 
 ## Discuss
 - WeChat: 123649881
+- Email: mbox.develop@gmail.com
 - [Contact us with lark](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=fb2k24b7-a10f-40d3-85a4-cd31abc6f3e2)
 <p align="left"><img src="doc/wechat.jpeg" alt="Wechat group" width="320px"></p>
 
