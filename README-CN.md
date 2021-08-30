@@ -8,7 +8,7 @@ MBox 是一款运行在 macOS 上，专注于移动端研发的工具链应用�
 
 ### 1. 多仓库管理
 
-MBox 新增了 Workspace 概念，将所有仓库统一管理，可以快速添加/移除仓库：
+MBox 新增了 [Workspace](https://github.com/MBoxPlus/mbox/wiki/MBox-terminology#workspace) 概念，将所有仓库统一管理，可以快速添加/移除仓库：
 
 ```shell
 $ mbox add AFNetworking
@@ -74,7 +74,7 @@ Git 仓库可以拥有独立的 git hooks，MBox 提供了 Workspace 级别的 G
 
 ### Feature 需求模型
 
-GitFlow 等分支模型的简化版本，MBox 保留了 Feature 概念，将它延伸到更多方向，不仅仅能够管理所有仓库的分支，还能保留未提交的改动，甚至不同 Feature 下进行仓库的差异化。
+GitFlow 等分支模型的简化版本，MBox 保留了 [Feature](https://github.com/MBoxPlus/mbox/wiki/MBox-terminology#feature) 概念，将它延伸到更多方向，不仅仅能够管理所有仓库的分支，还能保留未提交的改动，甚至不同 Feature 下进行仓库的差异化。
 
 ```bash
 $ mbox status
@@ -233,6 +233,29 @@ $ mbox status
 $ mbox pod install
 # 将直接使用本地的 AFNetworking，无需用户额外操作
 ```
+
+### 多容器切换
+
+MBox 引入了 [Container](https://github.com/MBoxPlus/mbox/wiki/MBox-terminology-cn#container) 概念，允许在同一个 Workspace 下有多个 App，这些 App 可能是同平台，也可能是跨平台的。
+
+```bash
+$ mbox status
+  MyIOSApp1       git@github.com:xx/MyIOSApp.git   [master]    ↑0  ↓0
+  MyIOSApp2       git@github.com:xx/MyIOSApp.git   [master]    ↑0  ↓0
+  MySDK           git@github.com:xx/MySDK.git      [master]    ↑0  ↓0
+    + [CocoaPods] MySDK
+    + [Gradle]    com.android.mysdk
+  MyAndroidApp    git@github.com:xx/MyAndroid.git  [master]    ↑0  ↓0
+
+Container:
+=> MyIOSApp1       Bundler + CocoaPods
+   MyIOSApp2       Bundler + CocoaPods
+=> MyAndroidApp    Gradle
+```
+
+上面例子中，MySDK 同时给 iOS 和 Android 提供支持，而有 3 个 App 集成了这个 MySDK。
+
+同平台的两个 App（MyIOSApp1 和 MyIOSApp2）可以通过切换当前容器的方式，运行不同的 App。不同平台的 App 互相不干扰，可以并行激活，实现跨端同步调试。
 
 ### 完善的插件化
 
