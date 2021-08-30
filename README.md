@@ -20,8 +20,6 @@ This repository is the repo without any source code of MBox. It is where we publ
 
 Concepts and terminology (e.g. a Workspace, Feature, Container and so forth) is explained [here](https://github.com/MBoxPlus/mbox/wiki/MBox-terminology).
 
-[CLI documentation](https://github.com/MBoxPlus/mbox/wiki/CLI-documentation)
-
 ### iOS
 
 - [Quick Start Demo](doc/quick_start_demo_ios.md)
@@ -33,6 +31,12 @@ Concepts and terminology (e.g. a Workspace, Feature, Container and so forth) is 
 
 ### Flutter
 *Work in Progress*
+
+## Advanced Usage
+
+- [使用指南](https://github.com/MBoxPlus/mbox/wiki/Tutorial)
+
+- [CLI documentation](https://github.com/MBoxPlus/mbox/wiki/CLI-documentation)
 
 ## Contributing
 You have many ways to participate in this project.

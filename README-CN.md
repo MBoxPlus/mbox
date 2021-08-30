@@ -20,8 +20,6 @@ $ brew install mbox
 
 一些概念和术语（比如 Workspace, Feature, Container 等等）解释在[这里](https://github.com/MBoxPlus/mbox/wiki/MBox-terminology-cn) 。
 
-[CLI 文档](https://github.com/MBoxPlus/mbox/wiki/CLI-documentation)
-
 ### iOS
 
 - [快速开始 Demo](doc/quick_start_demo_ios.md)
@@ -33,6 +31,12 @@ $ brew install mbox
 
 ### Flutter
 *Work in Progress*
+
+## 高级使用
+
+- [使用指南](https://github.com/MBoxPlus/mbox/wiki/Tutorial-cn)
+  
+- [CLI 文档](https://github.com/MBoxPlus/mbox/wiki/CLI-documentation)
 
 ## 参与项目
 你有多种方式来参与这个项目。
