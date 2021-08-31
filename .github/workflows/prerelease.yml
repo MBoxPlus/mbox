@@ -41,7 +41,7 @@ jobs:
           bundle exec rake release\[${{ github.event.pull_request.head.ref }}\]
 
       - name: Comment PR
-        uses: thollander/actions-comment-pull-request@master
+        uses: alawiii521/current-pr-comment@v1.0
         with:
-          message: "Install prerelease package. brew install mboxplus/test-tap/mboxt ${{ steps.release-package.outputs.RELEASED_VERSION }}"
+          comment: "Install prerelease package. brew install mboxplus/test-tap/mboxt ${{ steps.release-package.outputs.RELEASED_VERSION }}"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
