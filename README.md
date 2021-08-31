@@ -43,11 +43,7 @@ You have many ways to participate in this project.
 - [Submit bugs or feature requests](https://github.com/MBoxPlus/mbox/issues)
 - [Review pull requests](https://github.com/MBoxPlus/mbox/pulls)
 
-## Document for Contributor 
-
-- [Build Guide](doc/build.md)
-
-- [Release Guide](doc/release.md)
+Refer to [CONTRIBUTING](CONTRIBUTING.md)
 
 ## Discuss
 - WeChat: 123649881

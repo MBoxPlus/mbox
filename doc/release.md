@@ -2,15 +2,21 @@
 
 ## Release MBox
 
-- If you allow to bump plugins' version automatically, skip it. If you don't want to bump version automatically, you need to change the plugins' version in `mbox-package.yml` file.
+- Checkout a new branch named `release/[VERSION_TO_RELEASE]` like `release/1.0.1`.
 
-- Open `GitHub Action` page on the repo `MBoxPlus/mbox`.
+- `bundle install`
 
-- Choose branch 'main' and pass the **semantic version** (like "1.0.0") to the input field `Version of Release`. If you don't want to bump version automatically, pass **false** to the input field `Bump Plugin Version`.
+- `bundle exec rake bump_plugin` to bump all plugins' version.
 
-- Click the button `Run workflow`.
+- `bundle exec rake bump\['1.0.1'\]` to bump version.
 
-![img_1.png](img_1.png)
+- Open a pull request on [GitHub](https://github.com/MBoxPlus/mbox).
+
+- You can install a prerelease package after the pipeline jobs done.
+
+![img_2.png](img_2.png)
+
+- Click `Merge Pull Request` to trigger publishing.
 
 ## Release Plugin
 

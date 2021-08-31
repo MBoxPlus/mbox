@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.2.1
+
+#### Features
+
+- None
+
+#### Resolved Issues
+
+- Fix the issue that repositories from the gitlab subgroup can't be added.
+
 ## 1.2.0
 
 #### Features
