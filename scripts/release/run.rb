@@ -1,5 +1,6 @@
 require 'scripts/common/extension'
 require 'scripts/common/log'
+require 'scripts/common/github_action'
 require 'scripts/network/github_api'
 require 'json'
 require 'yaml'

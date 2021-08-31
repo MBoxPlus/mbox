@@ -2,22 +2,59 @@ name: Release
 
 on:
 
-  workflow_dispatch:
-    inputs:
-      version:
-        description: '[Version of Release] Version to Release. MINOR version will be bumped if the value is empty.'
-        required: false
-        default: ''
-      bump-plugin:
-        description: '[Bump Plugin Version] Whether need to bump the version of plugins to latest. Value: true/false.'
-        required: false
-        default: 'true'
+#  workflow_dispatch:
+#    inputs:
+#      version:
+#        description: '[Version of Release] Version to Release. MINOR version will be bumped if the value is empty.'
+#        required: false
+#        default: ''
+#      bump-plugin:
+#        description: '[Bump Plugin Version] Whether need to bump the version of plugins to latest. Value: true/false.'
+#        required: false
+#        default: 'true'
   push:
-    tags:
-      - "v**"
+    branches:
+      - "main"
 jobs:
+  bump:
+    runs-on: macos-11
+    outputs:
+      RELEASED_VERSION: ${{ steps.check-released-version.outputs.RELEASED_VERSION }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+          bundler-cache: true
+
+      - name: "Setup Git Access"
+        run: |
+          git config --global url."https://${{ secrets.ACCESS_TOKEN }}@github".insteadOf https://github
+
+#      - name: "Bump Plugins Version"
+#        if: ${{ github.event.inputs.bump-plugin == 'true' }}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+#        run: |
+#          bundle exec rake bump_plugin
+#
+#      - name: "Bump Version"
+#        if: ${{ github.event.inputs.version != '' }}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: |
+#          bundle exec rake "bump[${{ github.event.inputs.version }}]"
+
+      - name: "Check released version"
+        id: "check-released-version"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          bundle exec rake check_released_version
+
   release:
-    if: ${{ github.event.base_ref == 'refs/heads/main' }}
+    needs: bump
     runs-on: macos-11
     steps:
       - uses: actions/checkout@v2
@@ -36,27 +73,15 @@ jobs:
         run: |
           git config --global url."https://${{ secrets.ACCESS_TOKEN }}@github".insteadOf https://github
 
-      - name: "Bump Plugins Version"
-        if: ${{ github.event.inputs.bump-plugin == 'true' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        run: |
-          bundle exec rake bump_plugin
-
-      - name: "Bump Version"
-        if: ${{ github.event.inputs.version != '' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          bundle exec rake "bump[${{ github.event.inputs.version }}]"
-
       - name: "Archive Package"
+        if: ${{ needs.bump.outputs.RELEASED_VERSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           bundle exec rake package
 
       - name: "Release Package"
+        if: ${{ needs.bump.outputs.RELEASED_VERSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

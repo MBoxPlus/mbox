@@ -4,6 +4,7 @@ require 'scripts/package/run'
 require 'scripts/plugin/build'
 require 'scripts/plugin/release_plugin'
 require 'scripts/release/run'
+require 'scripts/release/check_released_version'
 require 'scripts/package/update_plugins_version'
 require 'rubygems/version.rb'
 require 'yaml'
@@ -45,6 +46,11 @@ task :bump, [:version] do |task, args|
   "git add mbox-package.yml".exec(__dir__)
   "git commit -m 'bump v#{package_info["version"]}'".exec(__dir__)
   "git push origin".exec(__dir__)
+end
+
+task :check_released_version, [:github_token] do |task, args|
+  github_token = get_github_token(args)
+  check_released_version(github_token, PACKAGE_FILE)
 end
 
 task :bump_plugin, [:github_token] do |task, args|
