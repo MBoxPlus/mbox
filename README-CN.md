@@ -1,5 +1,9 @@
 # MBox - 移动研发工具链
 
+![Version](https://img.shields.io/github/v/release/mboxplus/mbox)
+![Total Downloads](https://img.shields.io/github/downloads/mboxplus/mbox/total)
+![License](https://img.shields.io/github/license/mboxplus/mbox)
+
 **简体中文** | [English](./README.md)
 
 MBox 是一款运行在 macOS 上，专注于移动端研发的工具链应用。它不仅能帮助开发者管理环境、项目依赖和仓库，还允许开发者通过开发 MBox 插件来定制属于自己的工具链。
@@ -299,12 +303,8 @@ $ brew install mbox
 你有多种方式来参与这个项目。
 - [提交 bug 与 feature](https://github.com/MBoxPlus/mbox/issues)
 - [审阅提交](https://github.com/MBoxPlus/mbox/pulls)
-
-## 项目开发文档
-
-- [构建](doc/build.md)
-
-- [发布](doc/release.md)
+  
+了解更多请阅读 [CONTRIBUTING](CONTRIBUTING.md)
 
 ## 讨论
 - 微信号: 123649881

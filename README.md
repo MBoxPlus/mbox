@@ -1,5 +1,9 @@
 # MBox - Toolchain for Mobile App Development
 
+![Version](https://img.shields.io/github/v/release/mboxplus/mbox)
+![Total Downloads](https://img.shields.io/github/downloads/mboxplus/mbox/total)
+![License](https://img.shields.io/github/license/mboxplus/mbox)
+
 [简体中文](./README-CN.md) | **English**
 
 MBox is a toolchain App on macOS which focuses on Mobile App Development. It can help developers manage environments, dependencies, or repositories. Besides, developers can customize their tools or workflow by developing an MBox Plugin.
