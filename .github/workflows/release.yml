@@ -58,6 +58,6 @@ jobs:
 
       - name: "Release Package"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
           bundle exec rake release
