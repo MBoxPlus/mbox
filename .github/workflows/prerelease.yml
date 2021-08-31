@@ -34,7 +34,14 @@ jobs:
           bundle exec rake package\["-alpha.$(date +%Y%m%d%H%M%S)"\]
 
       - name: "Release Package"
+        id: "release-package"
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
           bundle exec rake release\[${{ github.event.pull_request.head.ref }}\]
+
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@master
+        with:
+          message: "Install prerelease package. brew install mboxplus/test-tap/mboxt ${{ steps.release-package.outputs.RELEASED_VERSION }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
