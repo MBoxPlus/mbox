@@ -36,6 +36,8 @@ def release(github_token, package_path, branch='main')
     release_file_path = File.join(File.dirname(package_path), "mbox-#{version}.tar.gz")
     FileUtils.cp(File.join(package_path, "release.tar.gz"), release_file_path)
     api.upload_release_asset(upload_url, release_file_path)
+  else
+    raise "Failed on creating release."
   end
 end
 
