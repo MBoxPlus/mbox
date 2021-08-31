@@ -9,6 +9,7 @@ on:
 jobs:
   prerelease:
     runs-on: macos-11
+    if: ${{ startsWith(github.event.pull_request.head.ref, 'release/') }}
     steps:
       - uses: actions/checkout@v2
 
@@ -28,13 +29,12 @@ jobs:
 
       - name: "Archive Package"
         env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          date_string = "$(date +%Y%m%d%H%M%S)"
-          bundle exec rake 'package[-alpha.$date_string]'
+          bundle exec rake package\["-alpha.$(date +%Y%m%d%H%M%S)"\]
 
       - name: "Release Package"
         env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          bundle exec rake 'release[${{ github.ref }}]'
+          bundle exec rake release\[${{ github.event.pull_request.head.ref }}\]

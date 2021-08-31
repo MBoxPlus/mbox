@@ -36,6 +36,8 @@ def release(github_token, package_path, branch='main')
     release_file_path = File.join(File.dirname(package_path), "mbox-#{version}.tar.gz")
     FileUtils.cp(File.join(package_path, "release.tar.gz"), release_file_path)
     api.upload_release_asset(upload_url, release_file_path)
+  else
+    raise "Failed on creating release."
   end
 end
 
@@ -46,13 +48,19 @@ def release_homebrew(github_token, tag, root, package_file_path)
     FileUtils .mkdir(root) unless File.exists?(root)
 
     package_info = YAML.load_file(package_file_path)
-    formula_name = "mbox"
-    tap = package_info['brew_tap']
-    if tag =~ /[0-9\.]-alpha/
+    formula_name = ""
+    tap = ""
+    if tag =~ /[0-9\.]+-alpha/
       LOG.info "Release to the tap for alpha test"
       tap = package_info['brew_tap_alpha']
       formula_name = "mboxt"
+    elsif tag =~ /^v?[0-9\.]+$/
+      tap = package_info['brew_tap']
+      formula_name = "mbox"
     end
+
+    raise "Brew tap not found." if tap.empty? || formula_name.empty?
+
     owner = package_info['owner']
     repo = package_info['repo']
 
