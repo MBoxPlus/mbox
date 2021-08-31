@@ -29,7 +29,8 @@ jobs:
       - name: "Archive Package"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: "bundle exec rake 'package[-alpha.'$(date +%Y%m%d%H%M%S)']'"
+        run: |
+          bundle exec rake package\["-alpha.$(date +%Y%m%d%H%M%S)"\]
 
       - name: "Release Package"'
         env:
