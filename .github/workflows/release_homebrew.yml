@@ -3,7 +3,7 @@ name: Release Homebrew
 on:
 
   release:
-    types: [published, prereleased, released]
+    types: [published]
 
 jobs:
   homebrew:
