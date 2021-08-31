@@ -9,6 +9,7 @@ on:
 jobs:
   prerelease:
     runs-on: macos-11
+    if: ${{ startsWith(github.event.pull_request.head.ref, 'refs/head/release/') }}
     steps:
       - uses: actions/checkout@v2
 
