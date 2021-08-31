@@ -7,7 +7,7 @@ on:
       - "main"
 
 jobs:
-  release:
+  prerelease:
     runs-on: macos-11
     steps:
       - uses: actions/checkout@v2
