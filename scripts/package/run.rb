@@ -5,12 +5,19 @@ require 'scripts/common/install_mbox'
 require 'scripts/common/log'
 
 def package(github_token, root, package_file_path, suffix='')
+  LOG.info "::group::Preparing Package [suffix=#{suffix}]"
+  LOG.info "Check directory if exists"
   FileUtils.rm_rf(root)
   FileUtils.mkdir(root) unless File.exists?(root)
+  LOG.info "::endgroup::"
 
+  LOG.info "::group::Downloading"
   download(github_token, root, package_file_path)
+  LOG.info "::endgroup::"
 
+  LOG.info "::group::Archiving"
   archive(root, package_file_path, suffix)
+  LOG.info "::endgroup::"
 end
 
 def download(github_token, root, package_file_path)
