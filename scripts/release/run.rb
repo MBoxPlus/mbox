@@ -5,7 +5,7 @@ require 'json'
 require 'yaml'
 require 'git'
 
-def release(github_token, package_path)
+def release(github_token, package_path, branch='main')
   raise "Current git is not clean.".red if !git_is_clean
   raise "GitHub PAT(Personal Access Token) was not found.".red if github_token.nil?
 
@@ -18,11 +18,17 @@ def release(github_token, package_path)
   version = package_info["version"]
   api = GitHubAPI.new(github_token, owner, repo)
 
+  target_commitish = branch
+  prerelease = false
+  if version =~ /[0-9\.]-/
+    prerelease = true
+  end
+
   (code, out) = api.get_release("v"+version)
   result = JSON.parse(out)
   raise "v#{version} has already exists." unless result['id'].nil?
 
-  (code, out) = api.create_release("v"+version)
+  (code, out) = api.create_release("v"+version, target_commitish, prerelease)
   release_json = JSON.parse(out)
   if release_json['upload_url'] =~ /^(.*)\{\?name,label\}/
     upload_url = $1

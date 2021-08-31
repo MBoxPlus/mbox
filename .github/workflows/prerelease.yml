@@ -1,0 +1,40 @@
+name: Pre Release
+
+on:
+
+  pull_request:
+    branches:
+      - "main"
+
+jobs:
+  release:
+    runs-on: macos-11
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+          bundler-cache: true
+
+      - name: "Select Xcode 12.5.1"
+        uses: devbotsxyz/xcode-select@v1
+        with:
+          version: "12.5.1"
+
+      - name: "Setup Git Access"
+        run: |
+          git config --global url."https://${{ secrets.ACCESS_TOKEN }}@github".insteadOf https://github
+
+      - name: "Archive Package"
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: |
+          date_string = "$(date +%Y%m%d%H%M%S)"
+          bundle exec rake 'package[-alpha.$date_string]'
+
+      - name: "Release Package"
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: |
+          bundle exec rake 'release[${{ github.ref }}]'

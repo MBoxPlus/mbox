@@ -12,9 +12,12 @@ on:
         description: '[Bump Plugin Version] Whether need to bump the version of plugins to latest. Value: true/false.'
         required: false
         default: 'true'
+  push:
+    tags:
+      - "v**"
 jobs:
   release:
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.event.base_ref == 'refs/heads/main' }}
     runs-on: macos-11
     steps:
       - uses: actions/checkout@v2
@@ -41,6 +44,7 @@ jobs:
           bundle exec rake bump_plugin
 
       - name: "Bump Version"
+        if: ${{ github.event.inputs.version != '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |

@@ -15,7 +15,7 @@ class GitHubAPI
     "#{@host}/#{@owner}/#{@repo}"
   end
 
-  def create_release(tag_name, target_commitish='main')
+  def create_release(tag_name, target_commitish='main', prerelease=false)
     api = "#{api_url}/releases"
     curl = "curl -s"\
        " -u username:#{@token}"\
@@ -23,7 +23,7 @@ class GitHubAPI
        " -H \"Accept: application/vnd.github.v3+json\""\
        " -s"\
        " #{api}"\
-       " -d '{\"tag_name\":\"#{tag_name}\",\"target_commitish\":\"#{target_commitish}\",\"name\":\"#{tag_name}\"}'"
+       " -d '{\"tag_name\":\"#{tag_name}\",\"target_commitish\":\"#{target_commitish}\",\"name\":\"#{tag_name}\",\"prerelease\":#{prerelease.to_s}}'"
     curl.exec
   end
 

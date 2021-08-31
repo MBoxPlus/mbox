@@ -64,14 +64,19 @@ task :release_plugin, [:github_token] do |task, args|
   release_all_plugin(github_token, PACKAGE_FILE, BUILD_DIR)
 end
 
-task :package, [:github_token] do |task, args|
+task :package, [:suffix, :github_token] do |task, args|
   github_token = get_github_token(args)
-  package(github_token, PACKAGE_DIR, PACKAGE_FILE)
+  if args[:suffix].nil? || args[:suffix].empty?
+    package(github_token, PACKAGE_DIR, PACKAGE_FILE)
+  else
+    package(github_token, PACKAGE_DIR, PACKAGE_FILE, args[:suffix])
+  end
 end
 
-task :release, [:github_token] do |task, args|
+task :release, [:branch, :github_token] do |task, args|
   github_token = get_github_token(args)
-  release(github_token, PACKAGE_DIR)
+  branch = args[:branch].sub('refs/head/', '')
+  release(github_token, PACKAGE_DIR, branch)
 end
 
 task :release_homebrew, [:tag] do |task, args|

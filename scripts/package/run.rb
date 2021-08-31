@@ -4,13 +4,13 @@ require 'scripts/common/log'
 require 'scripts/common/install_mbox'
 require 'scripts/common/log'
 
-def package(github_token, root, package_file_path)
+def package(github_token, root, package_file_path, suffix='')
   FileUtils.rm_rf(root)
   FileUtils.mkdir(root) unless File.exists?(root)
 
   download(github_token, root, package_file_path)
 
-  archive(root, package_file_path)
+  archive(root, package_file_path, suffix)
 end
 
 def download(github_token, root, package_file_path)
@@ -36,10 +36,16 @@ def download(github_token, root, package_file_path)
   end
 end
 
-def archive(root, package_file_path)
+def archive(root, package_file_path, suffix='')
   LOG.info "Begin to Archive".green
-  FileUtils.cp(package_file_path, File.join(root, "release.yml"))
-  package_info = YAML.load_file(package_file_path)
+  new_package_file_path = File.join(root, "release.yml")
+  FileUtils.cp(package_file_path, new_package_file_path)
+  package_info = YAML.load_file(new_package_file_path)
+
+  # add suffix to information yml
+  package_info['version'] = "#{package_info['version']}#{suffix}"
+  File.write(package_info, new_package_file_path)
+
   version = package_info['version']
   tar_output_path = File.join(root, "mbox-#{version}.tar.gz")
   FileUtils.rm_rf(tar_output_path)
