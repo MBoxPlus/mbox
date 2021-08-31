@@ -30,7 +30,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
-          date_string = "$(date +%Y%m%d%H%M%S)"
+          date_string="$(date +%Y%m%d%H%M%S)"
           bundle exec rake 'package[-alpha.$date_string]'
 
       - name: "Release Package"
