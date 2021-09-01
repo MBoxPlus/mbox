@@ -26,9 +26,9 @@ Concepts and terminology (e.g. a Workspace, Feature, Container and so forth) is 
 
 ### iOS
 
-- [Quick Start Demo](doc/quick_start_demo_ios.md)
+- [Quick Start Demo](https://github.com/MBoxPlus/mbox/wiki/Quick-Start-Demo-iOS)
 
-- [Getting Started for iOS](./doc/getting_started_ios.md)
+- [Getting Started for iOS](https://github.com/MBoxPlus/mbox/wiki/Getting-Started-iOS)
 
 ### Android
 *Work in Progress*
@@ -36,11 +36,12 @@ Concepts and terminology (e.g. a Workspace, Feature, Container and so forth) is 
 ### Flutter
 *Work in Progress*
 
-## Advanced Usage
+## Links
 
-- [Tutorial](https://github.com/MBoxPlus/mbox/wiki/Tutorial)
-
-- [CLI documentation](https://github.com/MBoxPlus/mbox/wiki/CLI-documentation)
+|  Name   | Description  |
+|  ----  | ----  |
+| [Tutorial](https://github.com/MBoxPlus/mbox/wiki/Tutorial) | More advanced usage |
+| [CLI documentation](https://github.com/MBoxPlus/mbox/wiki/CLI-documentation) | Command line tools documentation |
 
 ## Contributing
 You have many ways to participate in this project.

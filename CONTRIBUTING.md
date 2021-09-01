@@ -2,6 +2,6 @@
 
 ## Documentation
 
-- [Build Guide](doc/build.md)
+- [Build Guide](https://github.com/MBoxPlus/mbox/wiki/Build)
 
-- [Release Guide](doc/release.md)
+- [Release Guide](https://github.com/MBoxPlus/mbox/wiki/Release)
