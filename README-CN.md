@@ -265,6 +265,26 @@ Container:
 
 MBox 全程使用插件技术开发，MBox 本身也是使用 MBox 开发，因此，MBox 能不断通过插件技术扩充更多的能力，也能自己开发符合自己团队的插件。
 
+## 关于仓库
+
+> 这个仓库不包含 MBox 源码，在这里我们会发布产品、里程碑和工作计划，同时我们的用户可以在这里查找文档或提交 issue。
+
+MBox 使用插件技术，通过添加更多的插件，不断扩充 MBox 的能力。
+
+每个插件都在一个独立的代码仓库中，目前提供了一些核心插件：
+
+1. [MBoxCore](https://github.com/MBoxPlus/mbox-core) MBox 内核，主要负责插件加载、日志系统、命令分发等底层能力
+1. [MBoxGit](https://github.com/MBoxPlus/mbox-git) 给 MBox 提供 Git 支持，提供 `GitHelper` 进行 Git 仓库操作和 `GitCMD` 进行 Git 命令操作，使用 `libgit2` 作为底层 Git 库
+1. [MBoxWorkspace](https://github.com/MBoxPlus/mbox-workspace) Workspace 插件，给 MBox 提供多仓库操作能力，包括 Repository 操作和 Feature 操作
+1. [MBoxRuby](https://github.com/MBoxPlus/mbox-ruby) 提供 Ruby、Bundler 环境支持，提供了 `mbox bundle` 等命令
+1. [MBoxContainer](https://github.com/MBoxPlus/mbox-container) 
+Container 插件，Workspace 内存在多个主仓库时，通过切换当前 Container 的方式，切换主容器
+1. [MBoxDependencyManager](https://github.com/MBoxPlus/mbox-dependency-manager) 依赖管理工具插件，抽象出组件模型，通过激活的方式让组件使用本地代码。这个仓库只提供抽象能力，具体如何分析组件和如何使用需要额外插件来继承并实现
+1. [MBoxCocoapods](https://github.com/MBoxPlus/mbox-cocoapods) 扩展了 `MBoxDependencyManager` 和 `MBoxContainer` 插件，实现对 CocoaPods 组件和容器的识别能力
+1. [MBoxDev](https://github.com/MBoxPlus/mbox-dev) MBox 开发者基础库，MBox 也是通过 MBox 开发的
+1. [MBoxDevRuby](https://github.com/MBoxPlus/mbox-dev-ruby) 开发 MBox 插件中 Ruby 模块需要依赖该插件
+1. [MBoxDevNative](https://github.com/MBoxPlus/mbox-dev-native) 开发 MBox 插件中 Native 模块需要依赖该插件，CLI 属于 Native 模块
+
 ## 安装
 ```
 $ brew tap MBoxPlus/homebrew-tap
@@ -273,13 +293,9 @@ $ brew install mbox
 ```
 > 你必须先安装 [Homebrew](https://brew.sh/)
 
-## 关于仓库
-
-这个仓库不包含 MBox 源码，在这里我们会发布产品、里程碑和工作计划，同时我们的用户可以在这里查找文档或提交 issue。
-
 ## 开始使用
 
-一些概念和术语（比如 Workspace, Feature, Container 等等）解释在[这里](https://github.com/MBoxPlus/mbox/wiki/MBox-terminology-cn) 。
+开始之前，需要了解一些概念和术语（比如 Workspace, Feature, Container 等等）解释在[这里](https://github.com/MBoxPlus/mbox/wiki/MBox-terminology-cn) 。
 
 ### iOS
   
@@ -300,6 +316,8 @@ $ brew install mbox
 | [使用手册](https://github.com/MBoxPlus/mbox/wiki/Tutorial) | 更多高级用法 |
 | [CLI 文档](https://github.com/MBoxPlus/mbox/wiki/CLI-documentation) | 命令行工具文档 |
 
+
+- MBox 开发文档：TODO
 
 ## 参与项目
 你有多种方式来参与这个项目。
