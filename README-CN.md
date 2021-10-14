@@ -330,7 +330,7 @@ $ brew install mbox
 - 微信号: 123649881
 - 邮箱: mbox.develop@gmail.com
 - [加入MBox飞书群](https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=fb2k24b7-a10f-40d3-85a4-cd31abc6f3e2)
-<p align="left"><img src="doc/wechat.jpeg" alt="Wechat group" width="320px"></p>
+<p align="left"><img src="doc/wechat.JPG" alt="Wechat group" width="320px"></p>
 
 ## 开源许可
 MBox 开源许可基于 [GNU General Public License v2.0 or later](./LICENSE).
