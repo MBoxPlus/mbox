@@ -6,7 +6,8 @@
 
 **简体中文** | [English](./README.md)
 
-MBox 是一款运行在 macOS 上，专注于移动端研发的工具链应用。它不仅能帮助开发者管理环境、项目依赖和仓库，还允许开发者通过开发 MBox 插件来定制属于自己的工具链。
+MBox 是一款运行在 macOS 上，专注于移动端研发的工具链应用。它不仅能帮助开发者管理环境、项目依赖和仓库，还允许开发者通过开发 MBox 插件来定制属于自己的工具链。更多内容参见
+[一文读懂字节跳动自研移动研发工具链 MBox](https://mp.weixin.qq.com/s/5_IlQPWnCug_f3SDrnImCw)
 
 ## 功能
 
@@ -315,7 +316,6 @@ $ brew install mbox
 |  ----  | ----  |
 | [使用手册](https://github.com/MBoxPlus/mbox/wiki/Tutorial) | 更多高级用法 |
 | [CLI 文档](https://github.com/MBoxPlus/mbox/wiki/CLI-documentation) | 命令行工具文档 |
-
 
 - MBox 开发文档：TODO
 
