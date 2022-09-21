@@ -11,7 +11,48 @@ MBox 是一款运行在 macOS 上，专注于移动端研发的工具链应用�
 
 ## 功能
 
-### 1. 多仓库管理
+### 1. 环境部署
+
+每个工具、每个项目可能都需要预先安装一些系统工具，例如，项目中用了 `git-lfs`，或者 iOS 项目需要安装 `CocoaPods`。同步所有研发人员安装对应版本的工具是一个复杂的过程。
+
+MBox 在所有命令之前，会提前准备环境，保证环境的统一。MBox 称之为 `Launcher`，而每个插件都可以有自己的 Launcher，从而实现不同的插件部署不同的环境。例如：
+
+1. MBoxCore 插件负责部署 Homebrew、rsync、Xcode CLT
+1. MBoxGit 插件负责部署 Git、Git LFS
+1. MBoxRuby 插件负责部署 Bundler
+
+除了系统环境之外，环境部署还包括沙盒化环境，例如，`MBoxCocoapods` 插件需要依赖 `CocoaPods`，为了保证 Ruby Gem 的隔离，`MBoxCocoapods` 插件使用了 `Bundler` 作为 Gem 沙盒，因此需要先确保 `Bundler` 正常使用。因此 `MBoxCocoapods` 会在首次激活的时候，自动配置 Bundler，无需用户安装 Ruby，直接使用系统 Ruby 即可，也无需安装 CocoaPods，会自动完成这一系列：
+
+```bash
+$ mbox pod install -v
+Setup Workspace Environment
+Check Bundler Version
+  Parse `Gemfile.lock`
+  Require bundler 2.2.8
+  $ gem list -e bundler
+
+    *** LOCAL GEMS ***
+    bundler (2.2.19, 2.2.8, 2.1.4, default: 1.17.2)
+Using Bundler v2.2.8
+Check Bundler Gems
+  $ bundle _2.2.8_ check
+    Resolving dependencies...
+    Install missing gems with `bundle install`
+Setup Gemfile.lock
+  No valid Gemfile.lock to copy.
+Setup Bundler Gems
+  $ bundle _2.2.8_ update --all
+    Bundle updated!
+$ which bundle
+  /usr/bin/bundle
+$ bundle _2.2.8_ exec pod install --ansi --verbose
+....
+```
+
+因此，在 MBox 环境下，会保证环境的一致性，例如 CocoaPods 的版本。
+
+
+### 2. 多仓库管理
 
 MBox 新增了 [Workspace](https://github.com/MBoxPlus/mbox/wiki/MBox-terminology#workspace) 概念，将所有仓库统一管理，可以快速添加/移除仓库：
 
@@ -27,7 +68,7 @@ Checkout branch `master`
 Add repo `AFNetworking` success.
 ```
 
-### 2. Git 批量管理
+### 3. Git 批量管理
 
 在 Workspace 内的所有仓库，都受 MBox 控制，可以快速查询和修改 Git 状态：
 ```shell
@@ -65,7 +106,7 @@ $ mbox status
   AFNetworking   git@github.com:AFNetworking/AFNetworking.git  [develop]   ↑0  ↓0
 ```
 
-### Workspace 级别的 Git Hooks
+### 4. Workspace 级别的 Git Hooks
 
 Git 仓库可以拥有独立的 git hooks，MBox 提供了 Workspace 级别的 Git Hooks 统一管理能力，同一个 Hook 会按照以下顺序轮流执行：
 1. 运行插件内置 Git Hooks，影响所有仓库 (`Plugin/Resources/gitHooks`)
@@ -77,7 +118,7 @@ Git 仓库可以拥有独立的 git hooks，MBox 提供了 Workspace 级别的 G
 
 **注意：上述功能在 MBox 之外，使用其他 Git 客户端或者命令行，对 Workspace 下所有仓库始终有效**
 
-### Feature 需求模型
+### 5. Feature 需求模型
 
 GitFlow 等分支模型的简化版本，MBox 保留了 [Feature](https://github.com/MBoxPlus/mbox/wiki/MBox-terminology#feature) 概念，将它延伸到更多方向，不仅仅能够管理所有仓库的分支，还能保留未提交的改动，甚至不同 Feature 下进行仓库的差异化。
 
@@ -151,7 +192,7 @@ Show Status
 1. 切换 Feature 无需提交本地未提交的修改，会自动存入 Stash 中，下次切换回来自动还原
 1. `FreeMode` 是特殊的 Feature，不对它的分支名称做强制要求，但是也遵循场景还原策略
 
-### Feature 协作
+### 6. Feature 协作
 
 在团队协作中，往往需要多人同步开发一个需求，仓库列表和分支信息等不易交流。MBox 提供 Feature 快速导出与导入，实现同步协助
 
@@ -181,45 +222,7 @@ Show Status
   AFNetworking   git@github.com:AFNetworking/AFNetworking.git  [feature/testA]]   ↑0  ↓0   ->   [master]    ↳0   ↰0
 ```
 
-### 环境自动部署
-
-每个工具、每个项目可能都需要预先安装一些系统工具，例如，项目中用了 `git-lfs`，或者 iOS 项目需要安装 `CocoaPods`。同步所有研发人员安装对应版本的工具是一个复杂的过程。
-
-MBox 在所有命令之前，会提前准备环境，保证环境的统一。MBox 称之为 `Launcher`.
-
-例如，`MBoxCore` 核心库有 `XcodeCLT`、`Homebrew` 等依赖，会在首次运行的时候自动安装。
-
-例如，`MBoxCocoapods` `插件需要依赖` CocoaPods，为了保证 Ruby Gem 的隔离，`MBoxCocoapods` 插件使用了 `Bundler` 作为 Gem 沙盒，因此需要先确保 `Bundler` 正常使用。因此 `MBoxCocoapods` 会在首次激活的时候，自动配置 Bundler，无需用户安装 Ruby，直接使用系统 Ruby 即可，也无需安装 CocoaPods，会自动完成这一系列：
-
-```bash
-$ mbox pod install -v
-Setup Workspace Environment
-Check Bundler Version
-  Parse `Gemfile.lock`
-  Require bundler 2.2.8
-  $ gem list -e bundler
-
-    *** LOCAL GEMS ***
-    bundler (2.2.19, 2.2.8, 2.1.4, default: 1.17.2)
-Using Bundler v2.2.8
-Check Bundler Gems
-  $ bundle _2.2.8_ check
-    Resolving dependencies...
-    Install missing gems with `bundle install`
-Setup Gemfile.lock
-  No valid Gemfile.lock to copy.
-Setup Bundler Gems
-  $ bundle _2.2.8_ update --all
-    Bundle updated!
-$ which bundle
-  /usr/bin/bundle
-$ bundle _2.2.8_ exec pod install --ansi --verbose
-....
-```
-
-因此，在 MBox 环境下，会保证环境的一致性，例如 CocoaPods 的版本。
-
-### 统一的依赖管理
+### 7. 统一的依赖管理
 
 MBox 抽象了依赖管理，让所有跨端研发人员有相同的用户体验，通过插件化技术，不断扩充支持的依赖管理工具。
 
@@ -239,7 +242,7 @@ $ mbox pod install
 # 将直接使用本地的 AFNetworking，无需用户额外操作
 ```
 
-### 多容器切换
+### 8. 多容器切换
 
 MBox 引入了 [Container](https://github.com/MBoxPlus/mbox/wiki/MBox-terminology-cn#container) 概念，允许在同一个 Workspace 下有多个 App，这些 App 可能是同平台，也可能是跨平台的。
 
@@ -262,7 +265,7 @@ Container:
 
 同平台的两个 App（MyIOSApp1 和 MyIOSApp2）可以通过切换当前容器的方式，运行不同的 App。不同平台的 App 互相不干扰，可以并行激活，实现跨端同步调试。
 
-### 完善的插件化
+### 9. 完善的插件化
 
 MBox 全程使用插件技术开发，MBox 本身也是使用 MBox 开发，因此，MBox 能不断通过插件技术扩充更多的能力，也能自己开发符合自己团队的插件。
 
