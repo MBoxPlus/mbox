@@ -27,6 +27,7 @@ If there are multi-app in a workspace, this plugin allow user select a container
 1. [MBoxDev](https://github.com/MBoxPlus/mbox-dev) MBox Development Tool. The MBox develop the MBox.
 1. [MBoxDevRuby](https://github.com/MBoxPlus/mbox-dev-ruby) Develop the Ruby component of MBox.
 1. [MBoxDevNative](https://github.com/MBoxPlus/mbox-dev-native) Develop the Native component of MBox, include the CLI.
+1. [MBoxSSH](https://github.com/MBoxPlus/mbox-ssh) SSH configuration support.
 
 ## Installation
 ```
